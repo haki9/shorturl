@@ -47,7 +47,8 @@
                             <label for="exampleInputPassword1" class="form-label">Short URL: </label>
                             <a id="livestormUrl" href="#" target="_blank"></a>
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" value="9-days" class="btn btn-primary">9 Ngày</button>
+                        <button type="submit" value="detail" class="btn btn-primary">Chi tiết</button>
                     </form>
                 </div>
             </main>
@@ -136,11 +137,15 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <script>
-        $("#create_url_form").submit(function (e) {
-            e.preventDefault();
+        $("#create_url_form button").click(function (ev) {
+            ev.preventDefault()
             var email = document.getElementById('ipEmail').value;
-            var url = "https://hocphapluancong.com/9d/live/?p=" + crc32(email.toLowerCase(), true);
-            
+            var url = ""
+            if ($(this).attr("value") == "detail") {
+                url = "https://hocphapluancong.com/live?p=" + crc32(email.toLowerCase(), true) + "&type=detail";
+            } else {
+                url = "https://hocphapluancong.com/live?p=" + crc32(email.toLowerCase(), true) + "&type=9d";
+            }
             $("#livestormUrl").text(url);
             $("#livestormUrl").attr("href", url);
         });
