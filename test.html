@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <button id="copy-button">Copy Text</button>
+  <p id="text-to-copy">This is the text you want to copy 123.</p>
+
+  <script>
+    $(document).ready(function() {
+      // Click event handler for the copy button
+      $("#copy-button").click(function() {
+        // Get the text content from the element
+        var textToCopy = $("#text-to-copy").text();
+
+        // Create a temporary textarea element to copy the text to the clipboard
+        var tempTextarea = $("<textarea>");
+        tempTextarea.val(textToCopy);
+        $("body").append(tempTextarea);
+
+        // Select the text in the textarea
+        tempTextarea.select();
+
+        try {
+          // Execute the copy command
+          document.execCommand("copy");
+          alert("Text copied to clipboard!");
+        } catch (err) {
+          console.error("Unable to copy text: " + err);
+        }
+
+        // Remove the temporary textarea element
+        tempTextarea.remove();
+      });
+    });
+  </script>
+</body>
+</html>
