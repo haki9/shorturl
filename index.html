@@ -49,7 +49,7 @@
                         </div>
                         <button type="submit" value="9-days" class="btn btn-primary">9 Ngày</button>
                         <button type="submit" value="detail" class="btn btn-primary">Chi tiết</button>
-                        <button type="submit" id="copy-button" class="btn btn-primary">Copy URL</button>
+                        
                     </form>
                 </div>
             </main>
@@ -149,38 +149,20 @@
             }
             $("#livestormUrl").text(url);
             $("#livestormUrl").attr("href", url);
+           
+            var textToCopy = url
+
+            // Create a temporary textarea element to copy the text to the clipboard
+            var tempTextarea = $("<textarea>");
+            tempTextarea.val(textToCopy);
+            $("body").append(tempTextarea);
+            // Select the text in the textarea
+            tempTextarea.select();
+            document.execCommand("copy");
+            tempTextarea.remove();
         });
     </script>
 
-<script>
-    $(document).ready(function() {
-      // Click event handler for the copy button
-      $("#copy-button").click(function(e) {
-        e.preventDefault()
-        // Get the text content from the element
-        var textToCopy = $("#livestormUrl").text();
-
-        // Create a temporary textarea element to copy the text to the clipboard
-        var tempTextarea = $("<textarea>");
-        tempTextarea.val(textToCopy);
-        $("body").append(tempTextarea);
-
-        // Select the text in the textarea
-        tempTextarea.select();
-
-        try {
-          // Execute the copy command
-          document.execCommand("copy");
-          alert("Text copied to clipboard!");
-        } catch (err) {
-          console.error("Unable to copy text: " + err);
-        }
-
-        // Remove the temporary textarea element
-        tempTextarea.remove();
-      });
-    });
-  </script>
 </body>
 
 </html>
